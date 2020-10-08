@@ -1,4 +1,5 @@
 ﻿
+using AutoMapper;
 using NearestNeighborsSpamFilter.App.Domain.Interfaces.Entities;
 using NearestNeighborsSpamFilter.App.Domain.Interfaces.Repositories;
 using NearestNeighborsSpamFilter.App.Infrastructure.Db;
@@ -8,13 +9,14 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
 {
     public class EmailRepository : IEmailRepository
     {
-        public EmailRepository(NnDbContext dbContext)
+        public EmailRepository(NnDbContext dbContext, IMapper mapper)
         {
-            DbContext = dbContext;
+            _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public NnDbContext DbContext { get; }
-
+        private NnDbContext _dbContext { get; }
+        private IMapper _mapper { get; set; }
         public Email CreateOrUpdateEmail(Email email)
         {
             throw new System.NotImplementedException();

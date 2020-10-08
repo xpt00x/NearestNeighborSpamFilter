@@ -10,6 +10,6 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Db.DTO
         public int Frequency { get; set; }
         public bool Classification { get; set; }
 
-        public virtual Dictionary IdWordNavigation { get; set; }
+        public virtual BowDictionary IdWordNavigation { get; set; }
     }
 }

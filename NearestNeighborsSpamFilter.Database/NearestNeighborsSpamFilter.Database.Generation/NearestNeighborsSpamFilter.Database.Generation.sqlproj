@@ -61,7 +61,7 @@
     <Build Include="DataPoints.sql" />
     <Build Include="TrainingPoints.sql" />
     <Build Include="Emails.sql" />
-    <Build Include="Dictionary.sql" />
+    <Build Include="BowDictionary.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="NearestNeighborsSpamFilter.Database.Generation.refactorlog" />

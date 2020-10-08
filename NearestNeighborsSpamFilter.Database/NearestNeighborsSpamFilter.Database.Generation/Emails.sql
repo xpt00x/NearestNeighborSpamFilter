@@ -10,11 +10,11 @@
 GO
 
 CREATE TRIGGER trg_SetUpdatedTime_Emails
-ON dbo.Dictionary
+ON dbo.Emails
 AFTER UPDATE
 AS
-    UPDATE dbo.Dictionary
+    UPDATE dbo.Emails
     SET DateImported = SYSUTCDATETIME()
-    FROM dbo.Dictionary d
+    FROM dbo.Emails d
     JOIN inserted i
         ON d.Id = i.Id

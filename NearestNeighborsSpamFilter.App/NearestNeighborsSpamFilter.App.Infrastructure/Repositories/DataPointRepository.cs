@@ -1,4 +1,5 @@
-﻿using NearestNeighborsSpamFilter.App.Domain.Interfaces.Entities;
+﻿using AutoMapper;
+using NearestNeighborsSpamFilter.App.Domain.Interfaces.Entities;
 using NearestNeighborsSpamFilter.App.Domain.Interfaces.Entities.Enums;
 using NearestNeighborsSpamFilter.App.Domain.Interfaces.Repositories;
 using NearestNeighborsSpamFilter.App.Infrastructure.Db;
@@ -9,12 +10,12 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
     public class DataPointRepository : IDataPointRepository
     {
         private NnDbContext _context { get; set; }
-
-        public DataPointRepository(NnDbContext context)
+        public IMapper _mapper { get; }
+        public DataPointRepository(NnDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-
 
         public ICollection<DataPoint> GetAllDataPoints()
         {

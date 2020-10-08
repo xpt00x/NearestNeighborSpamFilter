@@ -3,11 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using NearestNeighborsSpamFilter.App.Infrastructure.Db.DTO;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Configuration;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 
 namespace NearestNeighborsSpamFilter.App.Infrastructure.Db
 {
     public partial class NnDbContext : DbContext
     {
+        private string connectionString { get; set; }
         public NnDbContext()
         {
         }
@@ -17,22 +19,18 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Db
         {
         }
 
-        public virtual DbSet<Dictionary> Dictionary { get; set; }
+        public virtual DbSet<BowDictionary> BowDictionary { get; set; }
         public virtual DbSet<Emails> Emails { get; set; }
         public virtual DbSet<DataPoints> DataPoints { get; set; }
         public virtual DbSet<TrainingPoints> TrainingPoints { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["NNSpamFilterConnection"].ConnectionString);
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Dictionary>(entity =>
+            modelBuilder.Entity<BowDictionary>(entity =>
             {
                 entity.Property(e => e.DateImported)
                     .HasColumnType("datetime2(3)")
@@ -62,7 +60,7 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Db
                 entity.HasOne(d => d.IdWordNavigation)
                     .WithMany(p => p.DataPoints)
                     .HasForeignKey(d => d.IdWord)
-                    .HasConstraintName("FK_DataPoints_Dictionary");
+                    .HasConstraintName("FK_DataPoints_BowDictionary");
             });
 
             modelBuilder.Entity<TrainingPoints>(entity =>
@@ -70,7 +68,7 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Db
                 entity.HasOne(d => d.IdWordNavigation)
                     .WithMany(p => p.TrainingPoints)
                     .HasForeignKey(d => d.IdWord)
-                    .HasConstraintName("FK_TrainingPoints_Dictionary");
+                    .HasConstraintName("FK_TrainingPoints_BowDictionary");
             });
 
             OnModelCreatingPartial(modelBuilder);

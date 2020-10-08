@@ -1,4 +1,7 @@
-﻿using NearestNeighborsSpamFilter.App.Domain.Interfaces.Repositories;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using NearestNeighborsSpamFilter.App.Domain.Interfaces.Repositories;
 using NearestNeighborsSpamFilter.App.Infrastructure.Db;
 using System;
 using System.Collections.Generic;
@@ -11,7 +14,7 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
         #region Repository fields
         private DataPointRepository _dataPointRepository;
         private TrainingPointRepository _trainingPointRepository;
-        private DictionaryRepository _dictionaryRepository;
+        private BowDictionaryRepository _BowDictionaryRepository;
         private EmailRepository _emailRepository;
         #endregion
 
@@ -22,7 +25,7 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
             {
                 if (this._dataPointRepository == null)
                 {
-                    this._dataPointRepository = new DataPointRepository(_dbContext);
+                    this._dataPointRepository = new DataPointRepository(_dbContext, _mapper);
                 }
                 return _dataPointRepository;
             }
@@ -33,20 +36,20 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
             {
                 if (this._trainingPointRepository == null)
                 {
-                    this._trainingPointRepository = new TrainingPointRepository(_dbContext);
+                    this._trainingPointRepository = new TrainingPointRepository(_dbContext, _mapper);
                 }
                 return _trainingPointRepository;
             }
         }
-        public DictionaryRepository DictionaryRepository
+        public BowDictionaryRepository BowDictionaryRepository
         {
             get
             {
-                if (this._dictionaryRepository == null)
+                if (this._BowDictionaryRepository == null)
                 {
-                    this._dictionaryRepository = new DictionaryRepository(_dbContext);
+                    this._BowDictionaryRepository = new BowDictionaryRepository(_dbContext, _mapper);
                 }
-                return _dictionaryRepository;
+                return _BowDictionaryRepository;
             }
         }
         public EmailRepository EmailRepository
@@ -55,19 +58,27 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
             {
                 if (this._emailRepository == null)
                 {
-                    this._emailRepository = new EmailRepository(_dbContext);
+                    this._emailRepository = new EmailRepository(_dbContext, _mapper);
                 }
                 return _emailRepository;
             }
         }
         #endregion
 
-        private NnDbContext _dbContext { get; set; } = new NnDbContext();
+        private NnDbContext _dbContext { get; set; }
+        private IMapper _mapper { get; set; }
+
+        public UnitOfWork(ServiceProvider provider)
+        {
+            _dbContext = provider.GetRequiredService<NnDbContext>();
+            this._mapper = provider.GetRequiredService<IMapper>();
+        }
         public void Commit()
         {
             _dbContext.SaveChanges();
         }
-        public void Rollback() {
+        public void Rollback()
+        {
             this.Dispose();
         }
 

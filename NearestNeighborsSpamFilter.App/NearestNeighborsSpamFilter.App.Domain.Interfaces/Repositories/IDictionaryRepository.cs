@@ -4,21 +4,21 @@ using System.Text;
 
 namespace NearestNeighborsSpamFilter.App.Domain.Interfaces.Repositories
 {
-    public interface IDictionaryRepository
+    public interface IBowDictionaryRepository
     {
-        ICollection<DictionaryPair> GetAllDictionaryPairs();
-        DictionaryPair GetDictionaryPairByWord(string word);
-        DictionaryPair GetDictionaryPairById(int it);
+        ICollection<BowDictionaryPair> GetAllBowDictionaryPairs();
+        BowDictionaryPair GetBowDictionaryPairByWord(string word);
+        BowDictionaryPair GetBowDictionaryPairById(int it);
 
-        DictionaryPair CreateOrUpdateDictionaryPair(DictionaryPair pair);
-        ICollection<DictionaryPair> CreateOrUpdateDictionaryPairs(ICollection<DictionaryPair> pairs);
+        BowDictionaryPair CreateOrUpdateBowDictionaryPair(BowDictionaryPair pair);
+        ICollection<BowDictionaryPair> CreateOrUpdateBowDictionaryPairs(ICollection<BowDictionaryPair> pairs);
 
-        void RemoveDictionaryPair(DictionaryPair pair);
-        void RemoveDictionaryPairById(int id);
-        void RemoveDictionaryPairByWord(string word);
-        void RemoveDictionaryPairs(ICollection<DictionaryPair> pair);
+        void RemoveBowDictionaryPair(BowDictionaryPair pair);
+        void RemoveBowDictionaryPairById(int id);
+        void RemoveBowDictionaryPairByWord(string word);
+        void RemoveBowDictionaryPairs(ICollection<BowDictionaryPair> pair);
 
-        void RemoveAllDictionaryPairs();
+        void RemoveAllBowDictionaryPairs();
         
     }
 }
