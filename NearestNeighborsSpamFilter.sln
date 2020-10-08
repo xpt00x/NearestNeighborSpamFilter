@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NearestNeighborsSpamFilter.Infrastructure", "NearestNeighborsSpamFilter.Infrastructure\NearestNeighborsSpamFilter.Infrastructure.csproj", "{2FDFC69E-0A84-4CEC-9CA8-9AEECAFC7EEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NearestNeighborsSpamFilter.Domain", "NearestNeighborsSpamFilter.Domain\NearestNeighborsSpamFilter.Domain.csproj", "{B74F99DC-F77D-4BE2-B78E-2859CFC85BDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FDFC69E-0A84-4CEC-9CA8-9AEECAFC7EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDFC69E-0A84-4CEC-9CA8-9AEECAFC7EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDFC69E-0A84-4CEC-9CA8-9AEECAFC7EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDFC69E-0A84-4CEC-9CA8-9AEECAFC7EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B74F99DC-F77D-4BE2-B78E-2859CFC85BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74F99DC-F77D-4BE2-B78E-2859CFC85BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74F99DC-F77D-4BE2-B78E-2859CFC85BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74F99DC-F77D-4BE2-B78E-2859CFC85BDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17DAE6FA-491B-4659-B0DF-97D3BE055768}
+	EndGlobalSection
+EndGlobal
