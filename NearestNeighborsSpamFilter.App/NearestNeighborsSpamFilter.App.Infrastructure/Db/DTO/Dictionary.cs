@@ -7,7 +7,7 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Db.DTO
     {
         public Dictionary()
         {
-            ModelDataPoints = new HashSet<ModelDataPoints>();
+            DataPoints = new HashSet<DataPoints>();
             TrainingPoints = new HashSet<TrainingPoints>();
         }
 
@@ -16,7 +16,7 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Db.DTO
         public DateTime DateImported { get; set; }
         public DateTime? DateUpdated { get; set; }
 
-        public virtual ICollection<ModelDataPoints> ModelDataPoints { get; set; }
+        public virtual ICollection<DataPoints> DataPoints { get; set; }
         public virtual ICollection<TrainingPoints> TrainingPoints { get; set; }
     }
 }

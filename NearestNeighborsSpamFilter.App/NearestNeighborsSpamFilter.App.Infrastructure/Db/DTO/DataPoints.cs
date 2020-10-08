@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NearestNeighborsSpamFilter.App.Infrastructure.Db.DTO
 {
-    public partial class ModelDataPoints
+    public partial class DataPoints
     {
         public int Id { get; set; }
         public int IdWord { get; set; }

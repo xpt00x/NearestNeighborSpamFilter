@@ -19,7 +19,7 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Db
 
         public virtual DbSet<Dictionary> Dictionary { get; set; }
         public virtual DbSet<Emails> Emails { get; set; }
-        public virtual DbSet<ModelDataPoints> ModelDataPoints { get; set; }
+        public virtual DbSet<DataPoints> DataPoints { get; set; }
         public virtual DbSet<TrainingPoints> TrainingPoints { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -57,12 +57,12 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Db
                 entity.Property(e => e.DateUpdated).HasColumnType("datetime2(3)");
             });
 
-            modelBuilder.Entity<ModelDataPoints>(entity =>
+            modelBuilder.Entity<DataPoints>(entity =>
             {
                 entity.HasOne(d => d.IdWordNavigation)
-                    .WithMany(p => p.ModelDataPoints)
+                    .WithMany(p => p.DataPoints)
                     .HasForeignKey(d => d.IdWord)
-                    .HasConstraintName("FK_ModelDataPoints_Dictionary");
+                    .HasConstraintName("FK_DataPoints_Dictionary");
             });
 
             modelBuilder.Entity<TrainingPoints>(entity =>
