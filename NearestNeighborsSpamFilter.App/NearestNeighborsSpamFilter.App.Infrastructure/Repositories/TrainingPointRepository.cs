@@ -5,7 +5,6 @@ using NearestNeighborsSpamFilter.App.Domain.Interfaces.Repositories;
 using NearestNeighborsSpamFilter.App.Infrastructure.Db;
 using NearestNeighborsSpamFilter.App.Infrastructure.Db.DTO;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
 {
@@ -22,15 +21,41 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
 
         public TrainingPoint CreateOrUpdateTrainingPoint(TrainingPoint trainingPoint)
         {
-            BowDictionary pair = _dbContext.BowDictionary.Where(w => w.Word.Equals(trainingPoint.Word)).FirstOrDefault();
-            TrainingPoints point = _mapper.Map<TrainingPoints>(trainingPoint);
-            point.IdWord = pair.Id;
-            _dbContext.Add(point);
+            TrainingPoints insert = _mapper.Map<TrainingPoints>(trainingPoint);
+            BowDictionary wordToInsert = new BowDictionary();
+
+            int? wordid = Tools.RepositoryTools.GetWordIdForTrainingPoint((INnDbContext)_dbContext, trainingPoint);
+            if (wordid == null)
+            {
+                wordToInsert.Word = trainingPoint.Word;
+                _dbContext.Add(wordToInsert);
+                _dbContext.SaveChanges();
+                wordid = wordToInsert.Id;
+            }
+            insert.IdWord = (int)wordid;
+            _dbContext.Add(insert);
+
+            trainingPoint = _mapper.Map<TrainingPoint>(insert);
+
             return trainingPoint;
         }
 
-        public ICollection<TrainingPoint> CreateOrUpdateTrainingPoints(ICollection<TrainingPoint> TrainingPoints)
+        public ICollection<TrainingPoint> CreateOrUpdateTrainingPoints(ICollection<TrainingPoint> trainingPoints)
         {
+            //TrainingPoints insert = _mapper.Map<TrainingPoints>(trainingPoint);
+            //BowDictionary wordToInsert = new BowDictionary();
+
+            //int? wordid = Tools.RepositoryTools.GetWordIdForTrainingPoint((INnDbContext)_dbContext, trainingPoint);
+            //if (wordid == null)
+            //{
+            //    wordToInsert.Word = trainingPoint.Word;
+            //    _dbContext.Add(wordToInsert);
+            //    _dbContext.SaveChanges();
+            //    wordid = wordToInsert.Id;
+            //}
+            //insert.IdWord = (int)wordid;
+            //_dbContext.Add(insert);
+            //return trainingPoint;
             throw new System.NotImplementedException();
         }
 

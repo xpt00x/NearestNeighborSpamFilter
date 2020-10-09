@@ -5,6 +5,7 @@ using NearestNeighborsSpamFilter.App.Domain.Interfaces.Repositories;
 using NearestNeighborsSpamFilter.App.Infrastructure.Db;
 using NearestNeighborsSpamFilter.App.Infrastructure.Db.DTO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
 {
@@ -21,9 +22,10 @@ namespace NearestNeighborsSpamFilter.App.Infrastructure.Repositories
 
         public BowDictionaryPair CreateOrUpdateBowDictionaryPair(BowDictionaryPair pair)
         {
-            BowDictionary item = _mapper.Map<BowDictionary>(pair);
-            _dbContext.BowDictionary.Add(item);
-            return pair;
+            //GetWordIdForTrainingPoint();
+            //    _dbContext.BowDictionary.Add(item);
+            //return pair;
+            throw new System.NotImplementedException();
         }
 
         public ICollection<BowDictionaryPair> CreateOrUpdateBowDictionaryPairs(ICollection<BowDictionaryPair> pairs)
